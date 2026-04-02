@@ -138,8 +138,23 @@ public class test1 {
         }
 
          */
+        //用户登陆
+
+        String rightUsername = "admin";
+        String rightPassword = "123456";
+        for (int i = 0; i < 3; i++) {
+            System.out.println("请输入用户名");
+            String username = sc.next();
+            System.out.println("请输入密码");
+            String password = sc.next();
+            if (username.equals(rightUsername) && password.equals(rightPassword)) {
+                System.out.println("登录成功");
+            } else {
+                System.out.println("登录失败");
+            }
+
+
+        }
         return;
-
-
     }
 }
