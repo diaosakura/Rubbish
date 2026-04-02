@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册表单验证</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .form-row { margin-bottom: 10px; }
+        label { display: inline-block; width: 120px; text-align: right; margin-right: 10px; }
+        input { width: 200px; }
+        .buttons { margin-left: 130px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<h2>用户注册</h2>
+<form id="regForm" onsubmit="return validateForm()">
+    <div class="form-row">
+        <label>登录账号:</label>
+        <input type="text" id="username" placeholder="字母开头,字母或数字">
+    </div>
+    <div class="form-row">
+        <label>密码:</label>
+        <input type="password" id="pwd" placeholder="8位以上,含特殊字符">
+    </div>
+    <div class="form-row">
+        <label>确认密码:</label>
+        <input type="password" id="repwd">
+    </div>
+    <div class="form-row">
+        <label>姓名:</label>
+        <input type="text" id="realName">
+    </div>
+    <div class="form-row">
+        <label>身份证号码:</label>
+        <input type="text" id="idCard" placeholder="18位身份证">
+    </div>
+    <div class="form-row">
+        <label>出生年月日:</label>
+        <input type="text" id="birthday" placeholder="yyyy-mm-dd">
+    </div>
+    <div class="form-row">
+        <label>住址:</label>
+        <input type="text" id="address">
+    </div>
+    <div class="form-row">
+        <label>邮编:</label>
+        <input type="text" id="zipCode" placeholder="6位数字">
+    </div>
+    <div class="form-row">
+        <label>E-mail:</label>
+        <input type="text" id="email">
+    </div>
+
+    <div class="buttons">
+        <button type="submit">提交注册</button>
+        <button type="reset">重置</button>
+    </div>
+</form>
+
+<script>
+    function validateForm() {
+        // 1. 获取所有控件对象
+        var username = document.getElementById("username");
+        var pwd = document.getElementById("pwd");
+        var repwd = document.getElementById("repwd");
+        var idCard = document.getElementById("idCard");
+        var birthday = document.getElementById("birthday");
+        var zipCode = document.getElementById("zipCode");
+        var email = document.getElementById("email");
+
+        // 2. 验证登录账号：字母开头，字母或数字
+        var regUser = /^[a-zA-Z][a-zA-Z0-9]*$/;
+        if (!regUser.test(username.value)) {
+            alert("登录账号必须以字母开头，且只能包含字母和数字！");
+            username.focus();
+            return false;
+        }
+
+        // 3. 验证密码：8位以上，且包含特殊字符（非字母数字）
+        var regPwd = /^(?=.*[^a-zA-Z0-9]).{8,}$/;
+        if (!regPwd.test(pwd.value)) {
+            alert("密码必须在8位以上，且包含至少一个特殊字符！");
+            pwd.focus();
+            return false;
+        }
+
+        // 4. 确认密码一致
+        if (pwd.value !== repwd.value) {
+            alert("两次输入的密码不一致！");
+            repwd.focus();
+            return false;
+        }
+
+        // 5. 验证出生年月日格式：yyyy-mm-dd
+        var regBirth = /^\d{4}-\d{2}-\d{2}$/;
+        if (!regBirth.test(birthday.value)) {
+            alert("出生年月日格式应为 yyyy-mm-dd！");
+            birthday.focus();
+            return false;
+        }
+
+        // 6. 根据出生日期判断身份证是否合法 (简单验证身份证中的日期部分)
+        // 身份证第7-14位是生日。例如 110101 19900101 123X
+        var birthInId = idCard.value.substring(6, 14); // 提取19900101
+        var cleanBirth = birthday.value.replace(/-/g, ""); // 把yyyy-mm-dd转成yyyymmdd
+        if (idCard.value.length !== 18 || birthInId !== cleanBirth) {
+            alert("身份证号码不合法（须18位且与出生日期相符）！");
+            idCard.focus();
+            return false;
+        }
+
+        // 7. 验证邮编：6位数字
+        var regZip = /^\d{6}$/;
+        if (!regZip.test(zipCode.value)) {
+            alert("邮编必须是6位数字！");
+            zipCode.focus();
+            return false;
+        }
+
+        // 8. 验证E-mail基本格式
+        var regEmail = /^^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        if (!regEmail.test(email.value)) {
+            alert("请输入正确的E-mail格式！");
+            email.focus();
+            return false;
+        }
+
+        alert("所有验证通过，准备提交！");
+        return true;
+    }
+</script>
+</body>
+</html>

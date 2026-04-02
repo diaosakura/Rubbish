@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>调查问卷</title>
+    <style>
+        body{font-family:sans-serif;}
+        table { border-collapse: collapse; }
+        td { padding: 5px; vertical-align: top; }
+        .title { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="title">调查问卷</div>
+
+<form action="#" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>姓名</td>
+            <td><input type="text" name="username"></td>
+        </tr>
+
+        <tr>
+            <td>性别</td>
+            <td>
+                <input type="radio" name="gender" id="male" value="male"> <label for="male">男</label>
+                <input type="radio" name="gender" id="female" value="female"> <label for="female">女</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>所在地</td>
+            <td>
+                <select name="location">
+                    <option value="libya">利比亚</option>
+                    <option value="china">中国</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>喜欢的歌手</td>
+            <td>
+                <input type="checkbox" name="singer" id="s1" checked> <label for="s1">张三</label>
+                <input type="checkbox" name="singer" id="s2" checked> <label for="s2">李四</label>
+                <input type="checkbox" name="singer" id="s3"> <label for="s3">王五</label>
+                <input type="checkbox" name="singer" id="s4"> <label for="s4">大连一哥</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>你的靓照</td>
+            <td><input type="file" name="photo"></td>
+        </tr>
+
+        <tr>
+            <td>个人描述</td>
+            <td>
+                <textarea name="description" cols="30" rows="10"></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="提交">
+                &nbsp;&nbsp;
+                <input type="reset" value="重置">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
